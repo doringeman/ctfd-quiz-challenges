@@ -1,0 +1,26 @@
+{% extends "challenge.html" %}
+
+{% block description %}
+    {{ challenge.html }}
+{% endblock %}
+
+{% block input %}
+    <input id="challenge-id" class="challenge-id" type="hidden" value="{{ challenge.id }}">
+
+    <form>
+        <input type="radio" id="challenge-variant-a" name="challenge-variant" value="challenge-variant-a">
+        <label for="challenge-variant-a">{{ challenge.variant_a }}</label><br>
+        <input type="radio" id="challenge-variant-b" name="challenge-variant" value="challenge-variant-b">
+        <label for="challenge-variant-b">{{ challenge.variant_b }}</label><br>
+        <input type="radio" id="challenge-variant-c" name="challenge-variant" value="challenge-variant-c">
+        <label for="challenge-variant-c">{{ challenge.variant_c }}</label><br>
+        <input type="radio" id="challenge-variant-d" name="challenge-variant" value="challenge-variant-d">
+        <label for="challenge-variant-d">{{ challenge.variant_d }}</label><br>
+    </form>
+{% endblock %}
+
+{% block submit %}
+    <button id="challenge-submit" class="challenge-submit" type="submit">
+        Submit
+    </button>
+{% endblock %}
