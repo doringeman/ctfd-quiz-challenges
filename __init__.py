@@ -21,6 +21,8 @@ class QuizChallengeModel(Challenges):
     variant_c = db.Column(db.String(100), default="")
     variant_d = db.Column(db.String(100), default="")
 
+    correct_variant = db.Column(db.String(1), default="A")
+
     def __init__(self, *args, **kwargs):
         super(QuizChallengeModel, self).__init__(**kwargs)
 
@@ -69,14 +71,20 @@ class QuizChallenge(BaseChallenge):
             "variant_b": challenge.variant_b,
             "variant_c": challenge.variant_c,
             "variant_d": challenge.variant_d,
+            "correct_variant": challenge.correct_variant,
         }
         return data
 
     @classmethod
     def attempt(cls, challenge, request):
         data = request.form or request.get_json()
-        res = data["variant_a"]
-        return res, "Correct" if res else "Incorrect"
+        try:
+            variant = next(filter(lambda x: data[x] is True, filter(lambda x: x.startswith("variant"), data.keys())))
+            print(challenge.correct_variant, variant[-1].upper())
+            correct = (challenge.correct_variant == variant[-1].upper())
+        except:
+            correct = False
+        return correct, "Correct" if correct else "Incorrect"
 
     @classmethod
     def solve(cls, user, team, challenge, request):
