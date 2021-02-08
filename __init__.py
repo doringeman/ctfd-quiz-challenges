@@ -80,7 +80,6 @@ class QuizChallenge(BaseChallenge):
         data = request.form or request.get_json()
         try:
             variant = next(filter(lambda x: data[x] is True, filter(lambda x: x.startswith("variant"), data.keys())))
-            print(challenge.correct_variant, variant[-1].upper())
             correct = (challenge.correct_variant == variant[-1].upper())
         except:
             correct = False
