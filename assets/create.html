@@ -33,6 +33,15 @@
     </label>
     <input type="string" class="form-control" name="variant_d" placeholder="Variant D" required>
 </div>
+
+<div class="form-group">
+    <label>
+        Max Attempts:<br>
+        <small class="form-text text-muted">Maximum amount of attempts users receive. Leave at 0 for unlimited.</small>
+    </label>
+
+    <input type="number" class="form-control chal-attempts" name="max_attempts" value="1">
+</div>
 {% endblock %}
 
 {% block type %}
